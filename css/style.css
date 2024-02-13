@@ -64,9 +64,9 @@ a {
 }
 
 .content {
+  min-width: 80%;
   flex: 1 0 auto;
   background-color: var(--surface0);
-  width: 80%;
   border-radius: 16px;
   padding: 16px;
 }
@@ -95,6 +95,11 @@ a {
 }
 
 #sketch-container {
+  display: flex;
+  justify-content: center;
+}
+
+#sketch-border {
   background-color: var(--surface1);
   padding: 48px;
   border-radius: 48px;
@@ -102,6 +107,7 @@ a {
 
 #box-container {
   background-color: var(--crust);
+  width: 640px;
   aspect-ratio: 1 / 1;
   display: flex;
   justify-content: space-between;
@@ -114,7 +120,6 @@ a {
 .box {
   flex: none;
   background-color: var(--blue);
-  width: 32%;
   aspect-ratio: 1 / 1;
   border-radius: 8px;
 }
