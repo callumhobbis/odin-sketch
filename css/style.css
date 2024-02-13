@@ -110,16 +110,22 @@ a {
   width: 640px;
   aspect-ratio: 1 / 1;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 8px;
+}
+
+.box-row {
+  background-color: var(--red);
+  height: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  flex: 1;
 }
 
 .box {
-  flex: none;
   background-color: var(--blue);
-  aspect-ratio: 1 / 1;
   border-radius: 8px;
+  flex: 1;
 }
