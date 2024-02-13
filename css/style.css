@@ -125,6 +125,5 @@ a {
 
 .box {
   background-color: var(--blue);
-  border-radius: 8px;
   flex: 1;
 }
