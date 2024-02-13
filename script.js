@@ -1,8 +1,11 @@
+const INITIAL_WIDTH = 16;
+
 function drawTiles(gridWidth) {
   const container = document.getElementById("box-container");
+  container.innerHTML = "";
 
   // make gap size proportional to tile size
-  totalWidth = container.offsetWidth;
+  const totalWidth = container.offsetWidth;
   const gap = Math.floor((totalWidth / gridWidth) * 0.05);
 
   for (i = 0; i < gridWidth; i++) {
@@ -32,5 +35,15 @@ function drawTiles(gridWidth) {
   });
 }
 
-let gridWidth = 16;
-drawTiles(gridWidth);
+drawTiles(INITIAL_WIDTH);
+
+const widthButton = document.getElementById("set-width");
+widthButton.addEventListener("click", (event) => {
+  const rawInput = prompt("New grid width (1 - 100):", "16");
+  const userInput = parseInt(rawInput);
+  if (!isNaN(userInput) && userInput > 0 && userInput <= 100) {
+    drawTiles(userInput);
+  } else {
+    alert(`Invalid input: ${rawInput}`);
+  }
+});
