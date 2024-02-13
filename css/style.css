@@ -27,6 +27,7 @@
 body,
 button {
   font-family: Roboto, Arial, sans-serif;
+  color: var(--text);
 }
 
 html,
@@ -36,7 +37,6 @@ body {
 
 body {
   background-color: var(--base);
-  color: var(--text);
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -103,6 +103,11 @@ a {
   background-color: var(--surface1);
   padding: 48px;
   border-radius: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
 }
 
 #box-container {
@@ -124,6 +129,20 @@ a {
 }
 
 .box {
-  background-color: var(--blue);
+  background-color: var(--mantle);
   flex: 1;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+button {
+  border: 0;
+  background-color: var(--overlay0);
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
 }
