@@ -101,6 +101,20 @@ a {
 }
 
 #box-container {
-  background-color: var(--mantle);
+  background-color: var(--crust);
   aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+}
+
+.box {
+  flex: none;
+  background-color: var(--blue);
+  width: 32%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
 }
