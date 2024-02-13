@@ -47,3 +47,12 @@ widthButton.addEventListener("click", (event) => {
     alert(`Invalid input: ${rawInput}`);
   }
 });
+
+for (btn of document.querySelectorAll("button")) {
+  btn.addEventListener("mouseenter", (event) => {
+    btn.style.backgroundColor = "var(--overlay1)";
+  });
+  btn.addEventListener("mouseleave", (event) => {
+    btn.style.backgroundColor = "var(--overlay0)";
+  });
+}
