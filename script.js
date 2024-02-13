@@ -1,27 +1,36 @@
-const GRID_WIDTH = 4;
-const BOX_COUNT = GRID_WIDTH ** 2; // pre-compute
+function drawTiles(gridWidth) {
+  const container = document.getElementById("box-container");
 
-const container = document.getElementById("box-container");
+  // make gap size proportional to tile size
+  totalWidth = container.offsetWidth;
+  const gap = Math.floor((totalWidth / gridWidth) * 0.05);
 
-// make gap size proportional to tile size
-totalWidth = container.offsetWidth;
-const gap = Math.floor((totalWidth / GRID_WIDTH) * 0.05);
+  for (i = 0; i < gridWidth; i++) {
+    let row = document.createElement("div");
+    row.classList.add("box-row");
+    for (j = 0; j < gridWidth; j++) {
+      let box = document.createElement("div");
+      box.classList.add("box");
+      box.style.borderRadius = `${gap}px`;
+      row.appendChild(box);
+    }
 
-for (i = 0; i < GRID_WIDTH; i++) {
-  let row = document.createElement("div");
-  row.classList.add("box-row");
-  for (j = 0; j < GRID_WIDTH; j++) {
-    let box = document.createElement("div");
-    box.classList.add("box");
-    box.style.borderRadius = `${gap}px`;
-    row.appendChild(box);
+    row.style.gap = `${gap}px`;
+    row.style.padding = `0 ${gap}px`;
+
+    container.appendChild(row);
   }
 
-  row.style.gap = `${gap}px`;
-  row.style.padding = `0 ${gap}px`;
+  container.style.gap = `${gap}px`;
+  container.style.padding = `${gap}px 0`;
 
-  container.appendChild(row);
+  // add hover functionality, using bubbling to reduce number of checks needed
+  container.addEventListener("mouseover", (e) => {
+    if (e.target.classList.contains("box")) {
+      e.target.style.backgroundColor = "var(--blue)";
+    }
+  });
 }
 
-container.style.gap = `${gap}px`;
-container.style.padding = `${gap}px 0`;
+let gridWidth = 16;
+drawTiles(gridWidth);
