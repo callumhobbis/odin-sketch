@@ -1,6 +1,7 @@
 const INITIAL_WIDTH = 16;
+const INITIAL_MODE = "mono";
 
-function drawTiles(gridWidth) {
+function drawTiles(gridWidth, mode) {
   const container = document.getElementById("box-container");
   container.innerHTML = "";
 
@@ -35,24 +36,42 @@ function drawTiles(gridWidth) {
   });
 }
 
-drawTiles(INITIAL_WIDTH);
+let gridWidth = INITIAL_WIDTH;
+let mode = INITIAL_MODE;
+drawTiles(gridWidth, mode);
 
 const widthButton = document.getElementById("set-width");
 widthButton.addEventListener("click", (event) => {
   const rawInput = prompt("New grid width (1 - 100):", "16");
   const userInput = parseInt(rawInput);
   if (!isNaN(userInput) && userInput > 0 && userInput <= 100) {
-    drawTiles(userInput);
+    gridWidth = userInput;
+    drawTiles(gridWidth, mode);
   } else {
     alert(`Invalid input: ${rawInput}`);
   }
 });
 
+document.getElementById("set-mono").addEventListener("click", (event) => {
+  mode = "mono";
+  drawTiles(gridWidth, mode);
+});
+
+document.getElementById("set-rainbow").addEventListener("click", (event) => {
+  mode = "rainbow";
+  drawTiles(gridWidth, mode);
+});
+
+document.getElementById("set-fading").addEventListener("click", (event) => {
+  mode = "fading";
+  drawTiles(gridWidth, mode);
+});
+
 for (btn of document.querySelectorAll("button")) {
   btn.addEventListener("mouseenter", (event) => {
-    btn.style.backgroundColor = "var(--overlay1)";
+    event.target.style.backgroundColor = "var(--overlay1)";
   });
   btn.addEventListener("mouseleave", (event) => {
-    btn.style.backgroundColor = "var(--overlay0)";
+    event.target.style.backgroundColor = "var(--overlay0)";
   });
 }
