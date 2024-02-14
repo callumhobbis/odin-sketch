@@ -4,6 +4,9 @@ const INITIAL_MODE = "mono";
 function drawTiles(gridWidth, mode) {
   const container = document.getElementById("box-container");
   container.innerHTML = "";
+  container.removeEventListener("mouseover", listenerMono);
+  container.removeEventListener("mouseover", listenerRainbow);
+  container.removeEventListener("mouseover", listenerFading);
 
   // make gap size proportional to tile size
   const totalWidth = container.offsetWidth;
@@ -16,6 +19,10 @@ function drawTiles(gridWidth, mode) {
       let box = document.createElement("div");
       box.classList.add("box");
       box.style.borderRadius = `${gap}px`;
+      if (mode === "fading") {
+        box.style.backgroundColor =
+          "color-mix(in lch, var(--mantle) 100%, var(--blue) 0%)";
+      }
       row.appendChild(box);
     }
 
@@ -29,11 +36,39 @@ function drawTiles(gridWidth, mode) {
   container.style.padding = `${gap}px 0`;
 
   // add hover functionality, using bubbling to reduce number of checks needed
-  container.addEventListener("mouseover", (e) => {
-    if (e.target.classList.contains("box")) {
-      e.target.style.backgroundColor = "var(--blue)";
-    }
-  });
+  if (mode === "mono") {
+    container.addEventListener("mouseover", listenerMono);
+  } else if (mode === "rainbow") {
+    container.addEventListener("mouseover", listenerRainbow);
+  } else if (mode === "fading") {
+    container.addEventListener("mouseover", listenerFading);
+  }
+}
+
+function listenerMono(e) {
+  if (e.target.classList.contains("box")) {
+    e.target.style.backgroundColor = "var(--blue)";
+  }
+}
+
+function listenerRainbow(e) {
+  if (e.target.classList.contains("box")) {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+  }
+}
+
+function listenerFading(e) {
+  if (e.target.classList.contains("box")) {
+    const rawColor = e.target.style.backgroundColor;
+    let parsed = rawColor.replace(/[^0-9%]/g, "");
+    [dark, light] = parsed.split("%", 2).map((x) => parseInt(x, 10));
+    dark = Math.max(0, dark - 10);
+    light = Math.min(100, light + 10);
+    e.target.style.backgroundColor = `color-mix(in lch, var(--mantle) ${dark}%, var(--blue) ${light}%)`;
+  }
 }
 
 let gridWidth = INITIAL_WIDTH;
