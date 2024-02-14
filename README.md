@@ -1,4 +1,4 @@
-# odin-sketch
+# Odin Sketch
 
 A Etch-a-Sketch-like toy where hovering over the tiles lights them up. The buttons below the grid can be used to change the grid size and toggle different drawing modes.
 
